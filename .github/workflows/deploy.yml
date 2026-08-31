@@ -1,0 +1,18 @@
+name: Deploy proxy-reverse
+
+on:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reload proxy
+        run: docker compose up -d --force-recreate
